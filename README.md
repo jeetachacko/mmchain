@@ -4,27 +4,42 @@ A blockchain-based music usage tracking system that ensures a private and secure
 
 ## Steps for Setup
 
+Clone the repository to home directory (~)
 ```shell
 git clone git@github.com:jeetachacko/mmchain.git
+```
+```shell
 cd mmchain
 ```
 
 Install Prerequisites (the scripts are interactive and need user inputs like yes, enter to continue and setting a new/old password):  
 ```shell
 ./prerequisites1.sh
+```
+```shell
 cd mmchain
+```
+```shell
 ./prerequisites2.sh
 ```
 
 Fabric Setup: 
 ```shell
 source ~/.bashrc
+```
+```shell
 source ~/.profile
+```
+```shell
 ./fabric_setup.sh
 ```
 Open a new terminal to execute the API requests. The value of the requests can be edited in the script as desired.
 ```shell
 cd mmchain
+```
+```shell
 ./initialize_ledger.sh
+```
+```shell
 ./api_requests.sh
 ```
