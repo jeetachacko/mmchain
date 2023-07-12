@@ -12,6 +12,7 @@ cd mmchain
 Install Prerequisites (the scripts are interactive and need user inputs like yes, enter to continue and setting a new/old password):  
 ```shell
 ./prerequisites1.sh
+cd mmchain
 ./prerequisites2.sh
 ```
 
