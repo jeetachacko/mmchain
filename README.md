@@ -18,6 +18,8 @@ cd mmchain
 
 Fabric Setup: 
 ```shell
+source ~/.bashrc
+source ~/.profile
 ./fabric_setup.sh
 ```
 Open a new terminal to execute the API requests. The value of the requests can be edited in the script as desired.
