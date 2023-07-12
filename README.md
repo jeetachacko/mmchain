@@ -24,6 +24,7 @@ source ~/.profile
 ```
 Open a new terminal to execute the API requests. The value of the requests can be edited in the script as desired.
 ```shell
+cd mmchain
 ./initialize_ledger.sh
 ./api_requests.sh
 ```
