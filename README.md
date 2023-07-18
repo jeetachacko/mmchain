@@ -6,7 +6,7 @@ A blockchain-based music usage tracking system that ensures a private and secure
 
 Clone the repository to home directory (~)
 ```shell
-git clone git@github.com:jeetachacko/mmchain.git
+git clone https://github.com/jeetachacko/mmchain.git
 ```
 ```shell
 cd mmchain
