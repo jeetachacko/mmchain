@@ -43,3 +43,11 @@ cd mmchain
 ```shell
 ./api_requests.sh
 ```
+
+To delete and restart the Fabric blockchain network
+```shell
+./fabric_delete.sh
+```
+```shell
+./fabric_setup.sh
+```
