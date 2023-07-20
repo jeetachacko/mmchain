@@ -23,13 +23,6 @@ type Record struct {
 
 
 func (s *SmartContract) Create_contract(ctx contractapi.TransactionContextInterface,  recordingId int, userId int, contractType int) error {
-	exists, err := s.RecordExists(ctx, strconv.Itoa(recordingId))
-	if err != nil {
-		return err
-	}
-	if exists {
-		return fmt.Errorf("the record %s already exists", strconv.Itoa(recordingId))
-	}
 
 	current_time := time.Now().Local()
 	current_date := current_time.Format("02-01-2006")
@@ -56,15 +49,12 @@ func constructQueryResponseFromIterator(resultsIterator shim.StateQueryIteratorI
 			return nil, err
 		}
 		var record Record
-		//var r map[string]json.RawMessage
 		err = json.Unmarshal(queryResult.Value, &record)
-		//err = json.Unmarshal([]byte(queryResult.Value), &r)
 		if err != nil {
 			return nil, err
 		}
-		//delete(r, "docType")
 		records = append(records, &record)
-		//records = append(records, &r)
+		fmt.Printf("%v",records)
 	}
 
 	return records, nil
@@ -85,29 +75,7 @@ func getQueryResultForQueryString(ctx contractapi.TransactionContextInterface, q
 	return constructQueryResponseFromIterator(resultsIterator)
 }
 
-
-func (s *SmartContract) Get_contract_byRecordingId(ctx contractapi.TransactionContextInterface, recordingId int) (*Record, error) {
-	recordJSON, err := ctx.GetStub().GetState(strconv.Itoa(recordingId))
-	if err != nil {
-		return nil, fmt.Errorf("failed to read from world state: %v", err)
-	}
-	if recordJSON == nil {
-		return nil, fmt.Errorf("the record %s does not exist", strconv.Itoa(recordingId))
-	}
-
-	var record Record
-	err = json.Unmarshal(recordJSON, &record)
-	if err != nil {
-		return nil, err
-	}
-
-	return &record, nil
-}
-
-
 func (s *SmartContract) Get_allcontracts(ctx contractapi.TransactionContextInterface) ([]*Record, error) {
-	// range query with empty string for startKey and endKey does an
-	// open-ended query of all records in the chaincode namespace.
 	resultsIterator, err := ctx.GetStub().GetStateByRange("", "")
 	if err != nil {
 		return nil, err
@@ -131,14 +99,4 @@ func (s *SmartContract) Get_allcontracts(ctx contractapi.TransactionContextInter
 
 	return records, nil
 }
-
-func (s *SmartContract) RecordExists(ctx contractapi.TransactionContextInterface, id string) (bool, error) {
-        recordJSON, err := ctx.GetStub().GetState(id)
-        if err != nil {
-                return false, fmt.Errorf("failed to read from world state: %v", err)
-        }
-
-        return recordJSON != nil, nil
-}
-
 
