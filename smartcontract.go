@@ -15,6 +15,7 @@ type SmartContract struct {
 
 type Record struct {
 	DocType      string `json:"docType"`
+	Id           string `json:"Id"`
 	RecordingId  int `json:"recordingId"`
 	UserId       string `json:"userId"`
 	ContractType int    `json:"contractType"`
@@ -37,8 +38,9 @@ func (s *SmartContract) Create_contract(ctx contractapi.TransactionContextInterf
 	if err != nil {
 		return err
 	}
+	id := strconv.Itoa(recordingId) + " " + strconv.Itoa(userId)
 
-	return ctx.GetStub().PutState(strconv.Itoa(recordingId), recordJSON)
+	return ctx.GetStub().PutState(id, recordJSON)
 }
 
 func constructQueryResponseFromIterator(resultsIterator shim.StateQueryIteratorInterface) ([]*Record, error) {

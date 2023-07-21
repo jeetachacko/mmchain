@@ -2,7 +2,7 @@ package web
 
 import (
 	"fmt"
-	"strings"
+	"regexp"
 	"net/http"
 )
 
@@ -23,7 +23,8 @@ func (setup OrgSetup) Query(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	myString := string(evaluateResponse[:])
-	res := strings.ReplaceAll(myString, "\"docType\":\"record\",", "")
+	m1 := regexp.MustCompile("\"docType\":\"record\",\"Id\":\"*\",")
+	res := m1.ReplaceAllString(myString, "")
 	fmt.Fprintf(w, "%s", res)
 
 }
